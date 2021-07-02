@@ -38,7 +38,7 @@ class mainScene {
         // Call the new hit() method
         this.hit();
       }
-      
+
       // use arrow keys as inputs
       this.arrow = this.input.keyboard.createCursorKeys();
 
@@ -70,6 +70,16 @@ class mainScene {
 
       // Display the updated score on the screen
       this.scoreText.setText('score: ' + this.score);
+
+      // Make the player temporarily grow when he takes a coin
+      // Create a new tween
+      this.tweens.add({
+        targets: this.player, // on the player
+        duartion: 200, // for 200ms
+        scaleX: 1.2, // that scale vertically by 20%
+        scaleY: 1.2, // and scale horizontally by 20%
+        yoyo: true, //at the end, go back to original scale
+      });
     }
   }
   new Phaser.Game({
