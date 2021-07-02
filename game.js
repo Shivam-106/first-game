@@ -32,6 +32,13 @@ class mainScene {
     update() {
       // This method is called 60 times per second after create() 
       // It will handle all the game's logic, like movements
+
+      // If the player is overlapping with the coin
+      if (this.physics.overlap(this.player, this.coin)) {
+        // Call the new hit() method
+        this.hit();
+      }
+      
       // use arrow keys as inputs
       this.arrow = this.input.keyboard.createCursorKeys();
 
@@ -50,6 +57,19 @@ class mainScene {
       } else if (this.arrow.up.isDown) {
         this.player.y -= 3;
       } 
+    }
+
+    hit() {
+      // This is called every time the player touches the coin
+      // Change the position x and y of the coin randomly
+      this.coin.x = Phaser.Math.Between(100, 600);
+      this.coin.y = Phaser.Math.Between(100, 300);
+
+      // Increment the score by 10
+      this.score += 10;
+
+      // Display the updated score on the screen
+      this.scoreText.setText('score: ' + this.score);
     }
   }
   new Phaser.Game({
